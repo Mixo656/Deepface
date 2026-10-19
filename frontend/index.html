@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepSwap - Face Replacement Engine</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-effect"></div>
+    <div class="container">
+        <header>
+            <h1>Deep<span>Swap</span></h1>
+            <p>GPU-accelerated character replacement engine.</p>
+        </header>
+
+        <main>
+            <div class="upload-section">
+                <!-- Source Image -->
+                <div class="upload-card" id="image-upload">
+                    <div class="upload-icon">📸</div>
+                    <h3>Source Character</h3>
+                    <p>Image of the face you want to use</p>
+                    <input type="file" id="src-image" accept="image/*" hidden>
+                    <button class="select-btn" onclick="document.getElementById('src-image').click()">Select Image</button>
+                    <div class="preview-area" id="image-preview" style="display: none;"></div>
+                </div>
+
+                <!-- Target Video -->
+                <div class="upload-card" id="video-upload">
+                    <div class="upload-icon">🎥</div>
+                    <h3>Target Video</h3>
+                    <p>Video where face will be replaced</p>
+                    <input type="file" id="tgt-video" accept="video/mp4,video/x-m4v,video/*" hidden>
+                    <button class="select-btn" onclick="document.getElementById('tgt-video').click()">Select Video</button>
+                    <div class="preview-area" id="video-preview" style="display: none;">
+                        <video controls></video>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-section">
+                <div class="options-container">
+                    <div class="option-row">
+                        <label class="toggle-container">
+                            <input type="checkbox" id="enhance-toggle" checked>
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-label">HD Enhancer</span>
+                        </label>
+                        <select id="restore-type">
+                            <option value="gfpgan" selected>GFPGAN (High Quality & Fast GPU)</option>
+                            <option value="codeformer">CodeFormer (Ultra-Fidelity)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="option-row fidelity-row">
+                        <label>Fidelity: <span id="fidelity-val">50</span>%</label>
+                        <input type="range" id="fidelity-slider" min="0" max="100" value="50">
+                    </div>
+                </div>
+                <button id="process-btn" disabled>Generate Video</button>
+            </div>
+
+            <div class="status-section" id="status-section" style="display: none;">
+                <div class="status-text" id="status-text">Processing...</div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progress-bar"></div>
+                </div>
+            </div>
+
+            <div class="result-section" id="result-section" style="display: none;">
+                <h2>Result</h2>
+                <div class="result-video-container">
+                    <video id="result-video" controls playsinline preload="auto"></video>
+                </div>
+                <a id="download-link" href="#" download="swapped_video.mp4" class="select-btn download-btn">Download Final Video</a>
+            </div>
+        </main>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>

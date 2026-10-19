@@ -1,0 +1,19 @@
+# Local environments and caches
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+
+# Downloaded model artifacts
+models/*
+!models/.gitkeep
+
+# User-provided and generated media
+uploads/*
+outputs/*
+scratch/*
+
+# Temporary files
+*.tmp
+*.log
